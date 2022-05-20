@@ -1,19 +1,25 @@
 import { Context } from "koa";
+import { DataSource } from "typeorm";
+import api from "./api";
+import { appDataSource } from "./connection/connect";
+import Koa from "koa";
+import Router from "koa-router";
+import koaBody from "koa-body";
 
-const Koa = require("koa");
-const Router = require("koa-router");
 
 const app = new Koa();
 const router = new Router();
 
-router.get("/", (ctx: Context, next: any) => {
-  ctx.body = "홈";
+appDataSource.initialize().then(() => {
+  console.log("Data Source has been initialized!");
 });
 
-// app.use((ctx: Context) => {
-//   ctx.body = '2022년 5월 19일';
-// });
+app.use(koaBody({ multipart: true }));
+
+router.use("/api", api.routes());
+
+app.use(router.routes()).use(router.allowedMethods());
 
 app.listen(4000, () => {
-  console.log("Listening to port 4000");
+  console.log("heurm server is listening to port 4000");
 });
