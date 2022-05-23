@@ -7,10 +7,10 @@ const playerData = new Router();
 
 playerData.get("/", PlayerCtrl.playerList);
 playerData.post("/", PlayerCtrl.playerCreate);
-playerData.get("/:id", PlayerCtrl.playerList);
-playerData.delete(":id", PlayerCtrl.playerDelete);
-playerData.put(":id", PlayerCtrl.playerReplace);
-playerData.patch(":id", PlayerCtrl.playerUpdate);
+playerData.get("/:id", PlayerCtrl.playerRead);
+playerData.delete("/:id", PlayerCtrl.playerDelete);
+playerData.put("/:id", PlayerCtrl.playerReplace);
+playerData.patch("/:id", PlayerCtrl.playerUpdate);
 
 
 export default playerData;
