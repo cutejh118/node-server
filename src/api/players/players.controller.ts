@@ -8,9 +8,6 @@ const playerList = (ctx: Context) => {
 
 const playerCreate = async (ctx: Context) => {
   const { playerName, height, weight, backNumber, birthday } = ctx.request.body;
-
-  console.dir(ctx.request.body);
-
   try {
     await appDataSource
       .createQueryBuilder()
@@ -31,9 +28,12 @@ const playerCreate = async (ctx: Context) => {
     ctx.throw(500);
   }
 };
+const playerRead = (ctx: Context) => {
+    const { id } = ctx.params;
+    ctx.body = id+'입니다.';
+};
 
 const playerDelete = (ctx: Context) => {
-  ctx.body = "delete테스트";
 };
 
 const playerReplace = (ctx: Context) => {
@@ -44,4 +44,4 @@ const playerUpdate = (ctx: Context) => {
   ctx.body = "update테스트";
 };
 
-export { playerList, playerCreate, playerDelete, playerReplace, playerUpdate };
+export { playerList, playerCreate, playerRead, playerDelete, playerReplace, playerUpdate };
