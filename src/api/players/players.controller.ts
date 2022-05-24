@@ -15,7 +15,8 @@ const playerList = async (ctx: Context) => {
 };
 
 const playerCreate = async (ctx: Context) => {
-  const { playerName, height, weight, backNumber, birthday, team } = ctx.request.body;
+  const { playerName, height, weight, backNumber, birthday, team } =
+    ctx.request.body;
   try {
     await appDataSource
       .createQueryBuilder()
@@ -23,12 +24,12 @@ const playerCreate = async (ctx: Context) => {
       .into(Player)
       .values([
         {
-          playerName: playerName,
-          height: height,
-          weight: weight,
-          backNumber: backNumber,
-          birthday: birthday,
-          team: team
+          playerName,
+          height,
+          weight,
+          backNumber,
+          birthday,
+          team,
         },
       ])
       .execute();
@@ -50,7 +51,6 @@ const playerRead = async (ctx: Context) => {
     console.dir(error);
     ctx.throw(500);
   }
-  //선수명 입력
 };
 
 const playerDelete = async (ctx: Context) => {
@@ -58,45 +58,40 @@ const playerDelete = async (ctx: Context) => {
   const { name } = ctx.params;
   try {
     await appDataSource
-    .createQueryBuilder()
-    .delete()
-    .from(Player)
-    .where("playerName = :name  and id = :id "  ,  { name , id})
-    .execute();  
+      .createQueryBuilder()
+      .delete()
+      .from(Player)
+      .where("playerName = :name  and id = :id ", { name, id })
+      .execute();
   } catch (error) {
     console.dir(error);
-    ctx.throw(500);   
-  } 
-   //지정선수 삭제
-};
-
-const playerUpdate = async (ctx: Context) => {
-    const { id } = ctx.params;
-    const { playerName, height, weight, backNumber, birthday, team } = ctx.request.body;
-  try {
-    await appDataSource
-    .createQueryBuilder()
-    .update(Player)
-    .set({
-        playerName: playerName,
-        height: height,
-        weight: weight,
-        backNumber: backNumber,
-        birthday: birthday,
-        team: team
-    })
-    .where("id = :id", {id})
-    .execute()  
-  } catch (error) {
-    console.dir(error)
-    ctx.throw(500)
+    ctx.throw(500);
   }
 };
 
-export {
-  playerList,
-  playerCreate,
-  playerRead,
-  playerDelete,
-  playerUpdate,
+const playerUpdate = async (ctx: Context) => {
+  const { id } = ctx.params;
+  const { playerName, height, weight, backNumber, birthday, team } =
+    ctx.request.body;
+
+  try {
+    await appDataSource
+      .createQueryBuilder()
+      .update(Player)
+      .set({
+        playerName,
+        height,
+        weight,
+        backNumber,
+        birthday,
+        team,
+      })
+      .where("id = :id", { id })
+      .execute();
+  } catch (error) {
+    console.dir(error);
+    ctx.throw(500);
+  }
 };
+
+export { playerList, playerCreate, playerRead, playerDelete, playerUpdate };

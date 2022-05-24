@@ -23,10 +23,10 @@ const teamCreate = async (ctx: Context) => {
       .into(team)
       .values([
         {
-          teamName: teamName,
-          stadium: stadium,
-          place: place,
-          soccerManager: soccerManager
+          teamName,
+          stadium,
+          place,
+          soccerManager,
         },
       ])
       .execute();
@@ -48,7 +48,6 @@ const teamRead = async (ctx: Context) => {
     console.dir(error);
     ctx.throw(500);
   }
-  //선수명 입력
 };
 
 const teamDelete = async (ctx: Context) => {
@@ -56,43 +55,36 @@ const teamDelete = async (ctx: Context) => {
   const { name } = ctx.params;
   try {
     await appDataSource
-    .createQueryBuilder()
-    .delete()
-    .from(team)
-    .where("teamName = :name  and id = :id "  ,  { name , id})
-    .execute();  
+      .createQueryBuilder()
+      .delete()
+      .from(team)
+      .where("teamName = :name  and id = :id ", { name, id })
+      .execute();
   } catch (error) {
     console.dir(error);
-    ctx.throw(500);   
-  } 
-   //지정선수 삭제
-};
-
-const teamUpdate = async (ctx: Context) => {
-    const { id } = ctx.params;
-    const { teamName, stadium, place, soccerManager } = ctx.request.body;
-  try {
-    await appDataSource
-    .createQueryBuilder()
-    .update(team)
-    .set({
-        teamName: teamName,
-        stadium: stadium,
-        place: place,
-        soccerManager: soccerManager
-    })
-    .where("id = :id", {id})
-    .execute()  
-  } catch (error) {
-    console.dir(error)
-    ctx.throw(500)
+    ctx.throw(500);
   }
 };
 
-export {
-  teamList,
-  teamCreate,
-  teamRead,
-  teamDelete,
-  teamUpdate,
+const teamUpdate = async (ctx: Context) => {
+  const { id } = ctx.params;
+  const { teamName, stadium, place, soccerManager } = ctx.request.body;
+  try {
+    await appDataSource
+      .createQueryBuilder()
+      .update(team)
+      .set({
+        teamName,
+        stadium,
+        place,
+        soccerManager,
+      })
+      .where("id = :id", { id })
+      .execute();
+  } catch (error) {
+    console.dir(error);
+    ctx.throw(500);
+  }
 };
+
+export { teamList, teamCreate, teamRead, teamDelete, teamUpdate };
