@@ -1,11 +1,11 @@
 import Router from "koa-router";
-import * as teamCtrl from "./teams.controller";
-const teamData = new Router();
+import * as Ctrl from "./teams.controller";
+const teamRouter = new Router();
 
-teamData.get("/", teamCtrl.teamList);
-teamData.post("/", teamCtrl.teamCreate);
-teamData.get("/:name", teamCtrl.teamRead);
-teamData.delete("/:name", teamCtrl.teamDelete);
-teamData.patch("/:id", teamCtrl.teamUpdate);
+teamRouter.get("/", Ctrl.teamList);
+teamRouter.post("/", Ctrl.teamCreate);
+teamRouter.get("/:name", Ctrl.teamRead);
+teamRouter.delete("/:name", Ctrl.teamDelete);
+teamRouter.patch("/:id", Ctrl.teamUpdate);
 
-export default teamData;
+export default teamRouter;
