@@ -1,16 +1,11 @@
 import Router from "koa-router";
 import * as PlayerCtrl from "./players/players.controller";
-import koaBody from "koa-body";
 const playerData = new Router();
-
-
 
 playerData.get("/", PlayerCtrl.playerList);
 playerData.post("/", PlayerCtrl.playerCreate);
-playerData.get("/:id", PlayerCtrl.playerRead);
-playerData.delete("/:id", PlayerCtrl.playerDelete);
-playerData.put("/:id", PlayerCtrl.playerReplace);
+playerData.get("/:name", PlayerCtrl.playerRead);
+playerData.delete("/:name", PlayerCtrl.playerDelete);
 playerData.patch("/:id", PlayerCtrl.playerUpdate);
-
 
 export default playerData;
