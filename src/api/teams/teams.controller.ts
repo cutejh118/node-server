@@ -1,11 +1,11 @@
 import { Context } from "koa";
-import Player from "../../entity/player.entity";
+import team from "../../entity/team.entity";
 import appDataSource from "../../connection/connect";
 
-const playerList = async (ctx: Context) => {
+const teamList = async (ctx: Context) => {
   try {
     ctx.body = await appDataSource
-      .getRepository(Player)
+      .getRepository(team)
       .createQueryBuilder()
       .execute();
   } catch (error) {
@@ -14,21 +14,19 @@ const playerList = async (ctx: Context) => {
   }
 };
 
-const playerCreate = async (ctx: Context) => {
-  const { playerName, height, weight, backNumber, birthday, team } = ctx.request.body;
+const teamCreate = async (ctx: Context) => {
+  const { teamName, stadium, place, soccerManager } = ctx.request.body;
   try {
     await appDataSource
       .createQueryBuilder()
       .insert()
-      .into(Player)
+      .into(team)
       .values([
         {
-          playerName: playerName,
-          height: height,
-          weight: weight,
-          backNumber: backNumber,
-          birthday: birthday,
-          team: team
+          teamName: teamName,
+          stadium: stadium,
+          place: place,
+          soccerManager: soccerManager
         },
       ])
       .execute();
@@ -37,14 +35,14 @@ const playerCreate = async (ctx: Context) => {
     ctx.throw(500);
   }
 };
-const playerRead = async (ctx: Context) => {
+const teamRead = async (ctx: Context) => {
   const { name } = ctx.params;
   try {
     ctx.body = await appDataSource
       .createQueryBuilder()
       .select("*")
-      .from(Player, "player")
-      .where("playerName = :name", { name })
+      .from(team, "team")
+      .where("teamName = :name", { name })
       .execute();
   } catch (error) {
     console.dir(error);
@@ -53,15 +51,15 @@ const playerRead = async (ctx: Context) => {
   //선수명 입력
 };
 
-const playerDelete = async (ctx: Context) => {
+const teamDelete = async (ctx: Context) => {
   const { id } = ctx.request.query;
   const { name } = ctx.params;
   try {
     await appDataSource
     .createQueryBuilder()
     .delete()
-    .from(Player)
-    .where("playerName = :name  and id = :id "  ,  { name , id})
+    .from(team)
+    .where("teamName = :name  and id = :id "  ,  { name , id})
     .execute();  
   } catch (error) {
     console.dir(error);
@@ -70,20 +68,18 @@ const playerDelete = async (ctx: Context) => {
    //지정선수 삭제
 };
 
-const playerUpdate = async (ctx: Context) => {
+const teamUpdate = async (ctx: Context) => {
     const { id } = ctx.params;
-    const { playerName, height, weight, backNumber, birthday, team } = ctx.request.body;
+    const { teamName, stadium, place, soccerManager } = ctx.request.body;
   try {
     await appDataSource
     .createQueryBuilder()
-    .update(Player)
+    .update(team)
     .set({
-        playerName: playerName,
-        height: height,
-        weight: weight,
-        backNumber: backNumber,
-        birthday: birthday,
-        team: team
+        teamName: teamName,
+        stadium: stadium,
+        place: place,
+        soccerManager: soccerManager
     })
     .where("id = :id", {id})
     .execute()  
@@ -94,9 +90,9 @@ const playerUpdate = async (ctx: Context) => {
 };
 
 export {
-  playerList,
-  playerCreate,
-  playerRead,
-  playerDelete,
-  playerUpdate,
+  teamList,
+  teamCreate,
+  teamRead,
+  teamDelete,
+  teamUpdate,
 };

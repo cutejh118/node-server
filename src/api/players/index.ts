@@ -1,5 +1,5 @@
 import Router from "koa-router";
-import * as PlayerCtrl from "./players/players.controller";
+import * as PlayerCtrl from "./players.controller";
 const playerData = new Router();
 
 playerData.get("/", PlayerCtrl.playerList);

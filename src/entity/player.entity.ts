@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import Team from "./team.entity";
 
 @Entity()
 export default class Player {
@@ -19,4 +20,8 @@ export default class Player {
 
   @Column()
   birthday?: Date;
+
+  @ManyToOne(() => Team, (team) => team.players)
+  team!: Team;
+    
 }

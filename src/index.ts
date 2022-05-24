@@ -1,4 +1,5 @@
-import playerData from "./api";
+import playerData from "./api/players";
+import teamData from "./api/teams";
 import appDataSource from "./connection/connect";
 import Koa from "koa";
 import Router from "koa-router";
@@ -12,7 +13,7 @@ appDataSource.initialize().then(() => {
 });
 
 router.use("/playerData", playerData.routes());
-
+router.use("/teamData", teamData.routes());
 app.use(koaBody({ multipart: true }));
 app.use(router.routes()).use(router.allowedMethods());
 
