@@ -7,5 +7,6 @@ teamRouter.post("/", Ctrl.teamCreate);
 teamRouter.get("/:name", Ctrl.teamRead);
 teamRouter.delete("/:id", Ctrl.teamDelete);
 teamRouter.patch("/:id", Ctrl.teamUpdate);
+teamRouter.get("/:id/players", Ctrl.teamMembers);
 
 export default teamRouter;

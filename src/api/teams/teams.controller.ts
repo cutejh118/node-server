@@ -1,6 +1,7 @@
 import { Context } from "koa";
 import team from "../../entity/team.entity";
 import appDataSource from "../../connection/connect";
+import Player from "../../entity/player.entity";
 
 const teamList = async (ctx: Context) => {
   try {
@@ -87,13 +88,13 @@ const teamUpdate = async (ctx: Context) => {
 };
 
 const teamMembers =async (ctx:Context) => {
-  const { name } = ctx.params;
+  const { id } = ctx.params;
   try {
     ctx.body = await appDataSource
     .createQueryBuilder()
     .select("*")
-    .from(team, "team")
-    .where("teamName = :name AND player.team = :id ", { name })
+    .from(Player, "player")
+    .where("teamId = :id", { id })
     .execute();
   } catch (error) {
     console.dir(error);
