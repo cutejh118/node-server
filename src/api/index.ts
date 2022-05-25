@@ -4,7 +4,7 @@ import teamRouter from "./teams";
 
 const router = new Router();
 
-router.use("/playerRouter", playerRouter.routes());
-router.use("/teamRouter", teamRouter.routes());
+router.use("/player", playerRouter.routes());
+router.use("/team", teamRouter.routes());
 
 export default router;
