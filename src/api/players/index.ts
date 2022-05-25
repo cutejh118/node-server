@@ -3,9 +3,9 @@ import * as Ctrl from "./players.controller";
 const playerRouter = new Router();
 
 playerRouter.get("/", Ctrl.playerList);
-playerRouter.post("/", Ctrl.playerCreate);
 playerRouter.get("/:name", Ctrl.playerRead);
-playerRouter.delete("/:id", Ctrl.playerDelete);
+playerRouter.post("/", Ctrl.playerCreate);
 playerRouter.patch("/:id", Ctrl.playerUpdate);
+playerRouter.delete("/:id", Ctrl.playerDelete);
 
 export default playerRouter;
