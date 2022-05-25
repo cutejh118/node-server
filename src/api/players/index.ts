@@ -2,10 +2,10 @@ import Router from "koa-router";
 import * as Ctrl from "./players.controller";
 const playerRouter = new Router();
 
-playerRouter.get("/", Ctrl.playerList);
-playerRouter.get("/:name", Ctrl.playerRead);
-playerRouter.post("/", Ctrl.playerCreate);
-playerRouter.patch("/:id", Ctrl.playerUpdate);
-playerRouter.delete("/:id", Ctrl.playerDelete);
+playerRouter.get("/", Ctrl.listPlayer);
+playerRouter.get("/:name", Ctrl.readPlayer);
+playerRouter.post("/", Ctrl.createPlayer);
+playerRouter.patch("/:id", Ctrl.updatePlayer);
+playerRouter.delete("/:id", Ctrl.deletePlayer);
 
 export default playerRouter;

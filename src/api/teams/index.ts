@@ -2,11 +2,11 @@ import Router from "koa-router";
 import * as Ctrl from "./teams.controller";
 const teamRouter = new Router();
 
-teamRouter.get("/", Ctrl.teamList);
-teamRouter.get("/:name", Ctrl.teamRead);
-teamRouter.get("/:id/players", Ctrl.teamMembers);
-teamRouter.post("/", Ctrl.teamCreate);
-teamRouter.patch("/:id", Ctrl.teamUpdate);
-teamRouter.delete("/:id", Ctrl.teamDelete);
+teamRouter.get("/", Ctrl.listTeam);
+teamRouter.get("/:name", Ctrl.readTeam);
+teamRouter.get("/:id/players", Ctrl.membersTeam);
+teamRouter.post("/", Ctrl.createTeam);
+teamRouter.patch("/:id", Ctrl.updateTeam);
+teamRouter.delete("/:id", Ctrl.deleteTeam);
 
 export default teamRouter;

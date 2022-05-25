@@ -2,7 +2,7 @@ import { Context } from "koa";
 import Player from "../../entity/player.entity";
 import appDataSource from "../../connection/connect";
 
-const playerList = async (ctx: Context) => {
+const listPlayer = async (ctx: Context) => {
   try {
     ctx.body = await appDataSource
       .getRepository(Player)
@@ -14,7 +14,7 @@ const playerList = async (ctx: Context) => {
   }
 };
 
-const playerCreate = async (ctx: Context) => {
+const createPlayer = async (ctx: Context) => {
   const { playerName, height, weight, backNumber, birthday, team } =
     ctx.request.body;
   try {
@@ -38,7 +38,7 @@ const playerCreate = async (ctx: Context) => {
     ctx.throw(500);
   }
 };
-const playerRead = async (ctx: Context) => {
+const readPlayer = async (ctx: Context) => {
   const { name } = ctx.params;
   try {
     ctx.body = await appDataSource
@@ -53,7 +53,7 @@ const playerRead = async (ctx: Context) => {
   }
 };
 
-const playerDelete = async (ctx: Context) => {
+const deletePlayer = async (ctx: Context) => {
   const { id } = ctx.params;
   try {
     await appDataSource
@@ -68,7 +68,7 @@ const playerDelete = async (ctx: Context) => {
   }
 };
 
-const playerUpdate = async (ctx: Context) => {
+const updatePlayer = async (ctx: Context) => {
   const { id } = ctx.params;
   const { playerName, height, weight, backNumber, birthday, team } =
     ctx.request.body;
@@ -93,4 +93,4 @@ const playerUpdate = async (ctx: Context) => {
   }
 };
 
-export { playerList, playerCreate, playerRead, playerDelete, playerUpdate };
+export { listPlayer, createPlayer, readPlayer, deletePlayer, updatePlayer };

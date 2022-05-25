@@ -3,7 +3,7 @@ import team from "../../entity/team.entity";
 import appDataSource from "../../connection/connect";
 import Player from "../../entity/player.entity";
 
-const teamList = async (ctx: Context) => {
+const listTeam = async (ctx: Context) => {
   try {
     ctx.body = await appDataSource
       .getRepository(team)
@@ -15,7 +15,7 @@ const teamList = async (ctx: Context) => {
   }
 };
 
-const teamCreate = async (ctx: Context) => {
+const createTeam = async (ctx: Context) => {
   const { teamName, stadium, place, manager } = ctx.request.body;
   try {
     await appDataSource
@@ -36,7 +36,7 @@ const teamCreate = async (ctx: Context) => {
     ctx.throw(500);
   }
 };
-const teamRead = async (ctx: Context) => {
+const readTeam = async (ctx: Context) => {
   const { name } = ctx.params;
   try {
     ctx.body = await appDataSource
@@ -51,7 +51,7 @@ const teamRead = async (ctx: Context) => {
   }
 };
 
-const teamDelete = async (ctx: Context) => {
+const deleteTeam = async (ctx: Context) => {
   const { id } = ctx.params;
   try {
     await appDataSource
@@ -66,7 +66,7 @@ const teamDelete = async (ctx: Context) => {
   }
 };
 
-const teamUpdate = async (ctx: Context) => {
+const updateTeam = async (ctx: Context) => {
   const { id } = ctx.params;
   const { teamName, stadium, place, manager } = ctx.request.body;
   try {
@@ -87,7 +87,7 @@ const teamUpdate = async (ctx: Context) => {
   }
 };
 
-const teamMembers = async (ctx: Context) => {
+const membersTeam = async (ctx: Context) => {
   const { id } = ctx.params;
   try {
     ctx.body = await appDataSource
@@ -102,4 +102,4 @@ const teamMembers = async (ctx: Context) => {
   }
 };
 
-export { teamList, teamCreate, teamRead, teamDelete, teamUpdate, teamMembers };
+export { listTeam, createTeam, readTeam, deleteTeam, updateTeam, membersTeam };
