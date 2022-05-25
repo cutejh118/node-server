@@ -18,7 +18,7 @@ const listTeam = async (ctx: Context) => {
 const createTeam = async (ctx: Context) => {
   const { teamName, stadium, place, manager } = ctx.request.body;
   try {
-    await appDataSource
+    ctx.body = await appDataSource
       .createQueryBuilder()
       .insert()
       .into(team)
@@ -54,7 +54,7 @@ const readTeam = async (ctx: Context) => {
 const deleteTeam = async (ctx: Context) => {
   const { id } = ctx.params;
   try {
-    await appDataSource
+    ctx.body = await appDataSource
       .createQueryBuilder()
       .delete()
       .from(team)
@@ -70,7 +70,7 @@ const updateTeam = async (ctx: Context) => {
   const { id } = ctx.params;
   const { teamName, stadium, place, manager } = ctx.request.body;
   try {
-    await appDataSource
+    ctx.body = await appDataSource
       .createQueryBuilder()
       .update(team)
       .set({
