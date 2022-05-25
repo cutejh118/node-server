@@ -54,14 +54,13 @@ const playerRead = async (ctx: Context) => {
 };
 
 const playerDelete = async (ctx: Context) => {
-  const { id } = ctx.request.query;
-  const { name } = ctx.params;
+  const { id } = ctx.params;
   try {
     await appDataSource
       .createQueryBuilder()
       .delete()
       .from(Player)
-      .where("playerName = :name  AND id = :id ", { name, id })
+      .where("id = :id ", { id })
       .execute();
   } catch (error) {
     console.dir(error);

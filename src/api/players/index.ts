@@ -5,7 +5,7 @@ const playerRouter = new Router();
 playerRouter.get("/", Ctrl.playerList);
 playerRouter.post("/", Ctrl.playerCreate);
 playerRouter.get("/:name", Ctrl.playerRead);
-playerRouter.delete("/:name", Ctrl.playerDelete);
+playerRouter.delete("/:id", Ctrl.playerDelete);
 playerRouter.patch("/:id", Ctrl.playerUpdate);
 
 export default playerRouter;
