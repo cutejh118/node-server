@@ -61,7 +61,7 @@ const playerDelete = async (ctx: Context) => {
       .createQueryBuilder()
       .delete()
       .from(Player)
-      .where("playerName = :name  and id = :id ", { name, id })
+      .where("playerName = :name  AND id = :id ", { name, id })
       .execute();
   } catch (error) {
     console.dir(error);

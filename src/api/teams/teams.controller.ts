@@ -58,7 +58,7 @@ const teamDelete = async (ctx: Context) => {
       .createQueryBuilder()
       .delete()
       .from(team)
-      .where("teamName = :name  and id = :id ", { name, id })
+      .where("teamName = :name  AND id = :id ", { name, id })
       .execute();
   } catch (error) {
     console.dir(error);
@@ -90,7 +90,12 @@ const teamUpdate = async (ctx: Context) => {
 const teamMembers =async (ctx:Context) => {
   const { name } = ctx.params;
   try {
-    
+    ctx.body = await appDataSource
+    .createQueryBuilder()
+    .select("*")
+    .from(team, "team")
+    .where("teamName = :name AND player.team = :id ", { name })
+    .execute();
   } catch (error) {
     console.dir(error);
     ctx.throw(500)
