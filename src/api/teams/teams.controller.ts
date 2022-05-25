@@ -87,4 +87,16 @@ const teamUpdate = async (ctx: Context) => {
   }
 };
 
-export { teamList, teamCreate, teamRead, teamDelete, teamUpdate };
+const teamMembers =async (ctx:Context) => {
+  const { name } = ctx.params;
+  try {
+    
+  } catch (error) {
+    console.dir(error);
+    ctx.throw(500)
+  }
+
+};
+
+
+export { teamList, teamCreate, teamRead, teamDelete, teamUpdate ,teamMembers};

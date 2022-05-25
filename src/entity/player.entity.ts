@@ -23,5 +23,4 @@ export default class Player {
 
   @ManyToOne(() => Team, (team) => team.players)
   team!: Team;
-    
 }
