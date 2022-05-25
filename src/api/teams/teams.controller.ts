@@ -87,21 +87,19 @@ const teamUpdate = async (ctx: Context) => {
   }
 };
 
-const teamMembers =async (ctx:Context) => {
+const teamMembers = async (ctx: Context) => {
   const { id } = ctx.params;
   try {
     ctx.body = await appDataSource
-    .createQueryBuilder()
-    .select("*")
-    .from(Player, "player")
-    .where("teamId = :id", { id })
-    .execute();
+      .createQueryBuilder()
+      .select("*")
+      .from(Player, "player")
+      .where("teamId = :id", { id })
+      .execute();
   } catch (error) {
     console.dir(error);
-    ctx.throw(500)
+    ctx.throw(500);
   }
-
 };
 
-
-export { teamList, teamCreate, teamRead, teamDelete, teamUpdate ,teamMembers};
+export { teamList, teamCreate, teamRead, teamDelete, teamUpdate, teamMembers };
