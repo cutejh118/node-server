@@ -15,7 +15,7 @@ const teamList = async (ctx: Context) => {
 };
 
 const teamCreate = async (ctx: Context) => {
-  const { teamName, stadium, place, soccerManager } = ctx.request.body;
+  const { teamName, stadium, place, manager } = ctx.request.body;
   try {
     await appDataSource
       .createQueryBuilder()
@@ -26,7 +26,7 @@ const teamCreate = async (ctx: Context) => {
           teamName,
           stadium,
           place,
-          soccerManager,
+          manager,
         },
       ])
       .execute();
@@ -68,7 +68,7 @@ const teamDelete = async (ctx: Context) => {
 
 const teamUpdate = async (ctx: Context) => {
   const { id } = ctx.params;
-  const { teamName, stadium, place, soccerManager } = ctx.request.body;
+  const { teamName, stadium, place, manager } = ctx.request.body;
   try {
     await appDataSource
       .createQueryBuilder()
@@ -77,7 +77,7 @@ const teamUpdate = async (ctx: Context) => {
         teamName,
         stadium,
         place,
-        soccerManager,
+        manager,
       })
       .where("id = :id", { id })
       .execute();

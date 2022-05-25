@@ -16,7 +16,7 @@ export default class Team {
   place?: string;
 
   @Column()
-  soccerManager?: string;
+  manager?: string;
 
   @OneToMany(() => Player, (player) => player.team)
   players!: Player[];
